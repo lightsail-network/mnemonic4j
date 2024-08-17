@@ -118,6 +118,49 @@ class MnemonicTest {
         assertEquals("access access acb acc act action", m.expand("access acce acb acc act acti"))
     }
 
+    @Test
+    fun testCustomWordlist() {
+        val wordlist = ArrayList<String>()
+        for (i in 1 until 2049) {
+            wordlist.add("word$i")
+        }
+        val m = Mnemonic(Language.ENGLISH, wordlist)
+        val mnemonic = m.toMnemonic("80808080808080808080808080808080".hexStringToByteArray())
+        assertEquals(
+            "word1029 word33 word258 word9 word65 word515 word17 word129 word1029 word33 word258 word5",
+            mnemonic
+        )
+    }
+
+    @Test
+    fun testCustomWordlistWithInvalidSize() {
+        val wordlist = ArrayList<String>()
+        for (i in 1 until 2048) {
+            wordlist.add("word$i")
+        }
+        assertThrows<IllegalArgumentException> { Mnemonic(Language.ENGLISH, wordlist) }
+    }
+
+    @Test
+    fun testGenerateWithInvalidSize() {
+        val m = Mnemonic(Language.ENGLISH)
+        assertThrows<IllegalArgumentException> { m.generate(129) }
+    }
+
+    @Test
+    fun testToEntropyWithInvalidSize() {
+        val m = Mnemonic(Language.ENGLISH)
+        val words = "abandon about abandon about abandon about abandon about".split(" ")
+        assertThrows<IllegalArgumentException> { m.toEntropy(words) }
+    }
+
+    @Test
+    fun testToMnemonicWithInvalidSize() {
+        val m = Mnemonic(Language.ENGLISH)
+        val entropy = "808080808080808080808080808080808080808080808080808080808080808080".hexStringToByteArray()
+        assertThrows<IllegalArgumentException> { m.toMnemonic(entropy) }
+    }
+
     @ParameterizedTest
     @MethodSource("testGenerateProvider")
     fun testGenerate(language: Language, strength: Int, expectedWordCount: Int) {
