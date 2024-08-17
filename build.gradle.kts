@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "network.lightsail"
-version = "0.1.0"
+version = "0.1.1"
 
 repositories {
     mavenCentral()
@@ -18,8 +18,6 @@ dependencies {
     testImplementation("com.google.code.gson:gson:2.11.0")
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.11.0")
 }
-
-
 
 tasks {
     test {
@@ -33,8 +31,8 @@ tasks {
 
     val javadocJar by creating(Jar::class) {
         archiveClassifier = "javadoc"
-        dependsOn(javadoc)
-        from(javadoc.get().destinationDir) // It needs to be placed after the javadoc task, otherwise it cannot read the path we set.
+        dependsOn(dokkaJavadoc)
+        from(dokkaJavadoc)
     }
 }
 

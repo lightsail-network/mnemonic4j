@@ -1,5 +1,9 @@
 # mnemonic4j
 
+[![Test and Deploy](https://github.com/lightsail-network/mnemonic4j/actions/workflows/test-deploy.yml/badge.svg?branch=main)](https://github.com/lightsail-network/mnemonic4j/actions/workflows/test-deploy.yml)
+[![Maven Central Version](https://img.shields.io/maven-central/v/network.lightsail/mnemonic4j)](https://central.sonatype.com/artifact/network.lightsail/mnemonic4j)
+[![javadoc](https://javadoc.io/badge2/network.lightsail/mnemonic4j/javadoc.svg)](https://javadoc.io/doc/network.lightsail/mnemonic4j)
+
 Java implementation of [BIP-0039](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki): Mnemonic code for
 generating deterministic keys.
 
@@ -16,9 +20,9 @@ To use this library in your Java project, add the following dependency to your `
 ```xml
 
 <dependency>
-    <groupId>org.lightsail</groupId>
+    <groupId>network.lightsail</groupId>
     <artifactId>mnemonic4j</artifactId>
-    <version>{version}</version>
+    <version>0.1.1</version>
 </dependency>
 ```
 
@@ -26,9 +30,16 @@ If you are using Gradle, add the following dependency to your `build.gradle` fil
 
 ```kotlin
 dependencies {
-    implementation("org.lightsail:mnemonic4j:{version}")
+    implementation("network.lightsail:mnemonic4j:0.1.1")
 }
 ```
+
+## Documentation
+
+Full documentation for this library can be found on:
+
+- [Javadoc](https://javadoc.io/doc/network.lightsail/mnemonic4j)
+- [GitHub Pages (latest release)](https://lightsail-network.github.io/mnemonic4j/)
 
 ## Usage
 
@@ -52,6 +63,15 @@ Mnemonic mnemonic = new Mnemonic();
 byte[] seed = Mnemonic.toSeed(words, "");
 ```
 
+### Checking Mnemonic Validity
+
+To check if a mnemonic sentence is valid, use the `isValid` method:
+
+```java
+String words = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
+boolean valid = new Mnemonic().check(words);
+```
+
 ### Retrieving Original Entropy
 
 To retrieve the original entropy from a mnemonic sentence, use the toEntropy method:
@@ -71,7 +91,7 @@ Mnemonic mnemonic = new Mnemonic(Language.CHINESE_SIMPLIFIED, null);
 String words = mnemonic.generate();
 ```
 
-To use a custom word list, pass the list of words as an array of strings:
+To use a custom word list, pass the list of words as a `List<String>` to the `Mnemonic` constructor:
 
 ```java
 List<String> customWords = Arrays.asList("word0", "word2", "word3", ...);
