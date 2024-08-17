@@ -1,0 +1,76 @@
+name: "Test and Deploy"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  release:
+    types:
+      - created
+
+env:
+  JAVA_VERSION: '21'
+  JAVA_DISTRIBUTION: 'zulu'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 8 is the minimum version supported by the project
+        # but it's not tested here
+        # because the plugin requires Java 11
+        java-version: [ 11, 17, 21 ]
+        java-distribution: [ 'zulu' ]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: ${{ matrix.java-distribution }}
+
+      - name: Test
+        run: ./gradlew check
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+      - name: Build
+        run: ./gradlew build
+      - name: Persist JAR Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: libs
+          path: build/libs/*.jar
+
+  javadoc:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+      - name: Generate Documentation
+        run: ./gradlew dokkaHtml
+      - name: Persist Documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: javadoc
+          path: ./build/dokka/html

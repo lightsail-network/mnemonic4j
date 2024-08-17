@@ -1,0 +1,89 @@
+# mnemonic4j
+
+Java implementation of [BIP-0039](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki): Mnemonic code for
+generating deterministic keys.
+
+## Overview
+
+This library provides an implementation of the Bitcoin BIP-0039 specification for generating mnemonic sentences and
+converting them into binary seeds. The generated seeds can be used to create deterministic wallets using BIP-0032 or
+similar methods.
+
+## Installation
+
+To use this library in your Java project, add the following dependency to your `pom.xml` file:
+
+```xml
+
+<dependency>
+    <groupId>org.lightsail</groupId>
+    <artifactId>mnemonic4j</artifactId>
+    <version>{version}</version>
+</dependency>
+```
+
+If you are using Gradle, add the following dependency to your `build.gradle` file:
+
+```kotlin
+dependencies {
+    implementation("org.lightsail:mnemonic4j:{version}")
+}
+```
+
+## Usage
+
+### Generating Mnemonic Sentence
+
+To generate a mnemonic sentence, create an instance of the `Mnemonic` class and call the `generate` method, specifying
+the desired strength (128 - 256):
+
+```java
+Mnemonic mnemonic = new Mnemonic();
+String words = mnemonic.generate();
+```
+
+### Converting Mnemonic to Seed
+
+To convert a mnemonic sentence into a binary seed, use the `toSeed` method:
+
+```java
+String words = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
+Mnemonic mnemonic = new Mnemonic();
+byte[] seed = Mnemonic.toSeed(words, "");
+```
+
+### Retrieving Original Entropy
+
+To retrieve the original entropy from a mnemonic sentence, use the toEntropy method:
+
+```java
+Mnemonic mnemonic = new Mnemonic();
+byte[] entropy = mnemonic.toEntropy(words);
+```
+
+### Multiple Languages and custom word lists support
+
+The library supports multiple languages and custom word lists. To generate a mnemonic sentence in a specific language,
+use the `Language` enum:
+
+```java
+Mnemonic mnemonic = new Mnemonic(Language.CHINESE_SIMPLIFIED, null);
+String words = mnemonic.generate();
+```
+
+To use a custom word list, pass the list of words as an array of strings:
+
+```java
+List<String> customWords = Arrays.asList("word0", "word2", "word3", ...);
+Mnemonic mnemonic = new Mnemonic(Language.ENGLISH, customWords);
+String words = mnemonic.generate();
+```
+
+## License
+
+This library is released under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
+
+## Acknowledgements
+
+This project was inspired by and builds upon the excellent work done in
+the [trezor/python-mnemonic](https://github.com/trezor/python-mnemonic) project.
