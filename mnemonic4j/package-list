@@ -1,0 +1,37 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:network.lightsail////PointingToDeclaration/mnemonic4j/network.lightsail/index.html
+$dokka.location:network.lightsail/Language.CHINESE_SIMPLIFIED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mnemonic4j/network.lightsail/-language/-c-h-i-n-e-s-e_-s-i-m-p-l-i-f-i-e-d/index.html
+$dokka.location:network.lightsail/Language.CHINESE_TRADITIONAL///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mnemonic4j/network.lightsail/-language/-c-h-i-n-e-s-e_-t-r-a-d-i-t-i-o-n-a-l/index.html
+$dokka.location:network.lightsail/Language.CZECH///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mnemonic4j/network.lightsail/-language/-c-z-e-c-h/index.html
+$dokka.location:network.lightsail/Language.Companion///PointingToDeclaration/mnemonic4j/network.lightsail/-language/-companion/index.html
+$dokka.location:network.lightsail/Language.Companion/allLanguages/#/PointingToDeclaration/mnemonic4j/network.lightsail/-language/-companion/all-languages.html
+$dokka.location:network.lightsail/Language.ENGLISH///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mnemonic4j/network.lightsail/-language/-e-n-g-l-i-s-h/index.html
+$dokka.location:network.lightsail/Language.FRENCH///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mnemonic4j/network.lightsail/-language/-f-r-e-n-c-h/index.html
+$dokka.location:network.lightsail/Language.ITALIAN///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mnemonic4j/network.lightsail/-language/-i-t-a-l-i-a-n/index.html
+$dokka.location:network.lightsail/Language.JAPANESE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mnemonic4j/network.lightsail/-language/-j-a-p-a-n-e-s-e/index.html
+$dokka.location:network.lightsail/Language.KOREAN///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mnemonic4j/network.lightsail/-language/-k-o-r-e-a-n/index.html
+$dokka.location:network.lightsail/Language.PORTUGUESE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mnemonic4j/network.lightsail/-language/-p-o-r-t-u-g-u-e-s-e/index.html
+$dokka.location:network.lightsail/Language.RUSSIAN///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mnemonic4j/network.lightsail/-language/-r-u-s-s-i-a-n/index.html
+$dokka.location:network.lightsail/Language.SPANISH///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mnemonic4j/network.lightsail/-language/-s-p-a-n-i-s-h/index.html
+$dokka.location:network.lightsail/Language.TURKISH///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mnemonic4j/network.lightsail/-language/-t-u-r-k-i-s-h/index.html
+$dokka.location:network.lightsail/Language///PointingToDeclaration/mnemonic4j/network.lightsail/-language/index.html
+$dokka.location:network.lightsail/Language/code/#/PointingToDeclaration/mnemonic4j/network.lightsail/-language/code.html
+$dokka.location:network.lightsail/Language/entries/#/PointingToDeclaration/mnemonic4j/network.lightsail/-language/entries.html
+$dokka.location:network.lightsail/Language/valueOf/#kotlin.String/PointingToDeclaration/mnemonic4j/network.lightsail/-language/value-of.html
+$dokka.location:network.lightsail/Language/values/#/PointingToDeclaration/mnemonic4j/network.lightsail/-language/values.html
+$dokka.location:network.lightsail/Mnemonic.Companion///PointingToDeclaration/mnemonic4j/network.lightsail/-mnemonic/-companion/index.html
+$dokka.location:network.lightsail/Mnemonic.Companion/detectLanguage/#kotlin.String/PointingToDeclaration/mnemonic4j/network.lightsail/-mnemonic/-companion/detect-language.html
+$dokka.location:network.lightsail/Mnemonic.Companion/toHdMasterKey/#kotlin.ByteArray#kotlin.Boolean/PointingToDeclaration/mnemonic4j/network.lightsail/-mnemonic/-companion/to-hd-master-key.html
+$dokka.location:network.lightsail/Mnemonic.Companion/toSeed/#kotlin.String#kotlin.String/PointingToDeclaration/mnemonic4j/network.lightsail/-mnemonic/-companion/to-seed.html
+$dokka.location:network.lightsail/Mnemonic///PointingToDeclaration/mnemonic4j/network.lightsail/-mnemonic/index.html
+$dokka.location:network.lightsail/Mnemonic/Mnemonic/#network.lightsail.Language#kotlin.collections.List[kotlin.String]?/PointingToDeclaration/mnemonic4j/network.lightsail/-mnemonic/-mnemonic.html
+$dokka.location:network.lightsail/Mnemonic/check/#kotlin.String/PointingToDeclaration/mnemonic4j/network.lightsail/-mnemonic/check.html
+$dokka.location:network.lightsail/Mnemonic/expand/#kotlin.String/PointingToDeclaration/mnemonic4j/network.lightsail/-mnemonic/expand.html
+$dokka.location:network.lightsail/Mnemonic/expandWord/#kotlin.String/PointingToDeclaration/mnemonic4j/network.lightsail/-mnemonic/expand-word.html
+$dokka.location:network.lightsail/Mnemonic/generate/#kotlin.Int/PointingToDeclaration/mnemonic4j/network.lightsail/-mnemonic/generate.html
+$dokka.location:network.lightsail/Mnemonic/language/#/PointingToDeclaration/mnemonic4j/network.lightsail/-mnemonic/language.html
+$dokka.location:network.lightsail/Mnemonic/toEntropy/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/mnemonic4j/network.lightsail/-mnemonic/to-entropy.html
+$dokka.location:network.lightsail/Mnemonic/toMnemonic/#kotlin.ByteArray/PointingToDeclaration/mnemonic4j/network.lightsail/-mnemonic/to-mnemonic.html
+network.lightsail
+
