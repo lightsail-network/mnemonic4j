@@ -13,7 +13,12 @@ repositories {
     mavenCentral()
 }
 
+val testWithBouncyCastle = project.findProperty("testWithBouncyCastle")?.toString()?.toBoolean() ?: false
+
 dependencies {
+    if (testWithBouncyCastle) {
+        testImplementation("org.bouncycastle:bcprov-jdk18on:1.78.1")
+    }
     testImplementation(kotlin("test"))
     testImplementation("com.google.code.gson:gson:2.11.0")
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.11.0")
@@ -22,6 +27,7 @@ dependencies {
 tasks {
     test {
         useJUnitPlatform()
+        systemProperty("testWithBouncyCastle", testWithBouncyCastle)
     }
 
     val sourcesJar by creating(Jar::class) {

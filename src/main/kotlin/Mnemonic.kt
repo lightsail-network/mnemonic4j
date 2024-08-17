@@ -109,7 +109,7 @@ class Mnemonic(val language: Language = Language.ENGLISH, wordlist: List<String>
                 PBKDF2_ROUNDS,
                 512
             )
-            val skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512")
+            val skf = getSecretKeyFactory("PBKDF2WithHmacSHA512")
             return skf.generateSecret(spec).encoded.copyOfRange(0, 64)
         }
 
@@ -127,7 +127,7 @@ class Mnemonic(val language: Language = Language.ENGLISH, wordlist: List<String>
             require(seed.size == 64) { "Provided seed should have length of 64" }
 
             val hmacKey = "Bitcoin seed".toByteArray(StandardCharsets.UTF_8)
-            val mac = Mac.getInstance("HmacSHA512")
+            val mac = getMac("HmacSHA512")
             mac.init(SecretKeySpec(hmacKey, "HmacSHA512"))
             val seedHmac = mac.doFinal(seed)
 
@@ -243,7 +243,7 @@ class Mnemonic(val language: Language = Language.ENGLISH, wordlist: List<String>
             "Data length should be one of the following: [16, 20, 24, 28, 32], but it is not ${entropy.size}."
         }
 
-        val hash = MessageDigest.getInstance("SHA-256").digest(entropy)
+        val hash = getMessageDigest("SHA-256").digest(entropy)
         val b = entropy.toBitString() + hash.toBitString().substring(0, entropy.size * 8 / 32)
         val result = mutableListOf<String>()
 
@@ -356,4 +356,47 @@ private fun base58Encode(v: ByteArray): String {
     v.takeWhile { it.toInt() == 0 }.forEach { _ -> encoded.append(alphabet[0]) }
 
     return encoded.reverse().toString()
+}
+
+// try import BouncyCastle library
+private val bouncyCastleProvider = tryImport {
+    Class.forName("org.bouncycastle.jce.provider.BouncyCastleProvider")
+        .getConstructor()
+        .newInstance() as java.security.Provider
+}
+
+// Choose the implementation of MessageDigest based on whether BouncyCastle library exists
+private fun getMessageDigest(algorithm: String): MessageDigest {
+    return if (bouncyCastleProvider != null) {
+        MessageDigest.getInstance(algorithm, bouncyCastleProvider)
+    } else {
+        MessageDigest.getInstance(algorithm)
+    }
+}
+
+// Choose the implementation of Mac based on whether BouncyCastle library exists
+private fun getMac(algorithm: String): Mac {
+    return if (bouncyCastleProvider != null) {
+        Mac.getInstance(algorithm, bouncyCastleProvider)
+    } else {
+        Mac.getInstance(algorithm)
+    }
+}
+
+// Choose the implementation of SecretKeyFactory based on whether BouncyCastle library exists
+private fun getSecretKeyFactory(algorithm: String): SecretKeyFactory {
+    return if (bouncyCastleProvider != null) {
+        SecretKeyFactory.getInstance(algorithm, bouncyCastleProvider)
+    } else {
+        SecretKeyFactory.getInstance(algorithm)
+    }
+}
+
+// Try to import the specified class, return null if the class does not exist
+inline fun <reified T> tryImport(block: () -> T): T? {
+    return try {
+        block()
+    } catch (e: ClassNotFoundException) {
+        null
+    }
 }
