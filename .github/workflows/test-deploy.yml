@@ -74,3 +74,57 @@ jobs:
         with:
           name: javadoc
           path: ./build/dokka/html
+
+
+  deploy-gh-releases:
+    needs: [ build, javadoc ]
+    permissions:
+      contents: write
+    if: github.event_name == 'release' && github.event.action == 'created'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Download JAR Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: libs
+          path: libs
+      - name: Download Java Documentation
+        uses: actions/download-artifact@v4
+        with:
+          name: javadoc
+          path: javadoc
+      - name: Archive Documentation
+        run: tar -czf mnemonic4j-javadoc.tar.gz javadoc
+      - name: Upload artifacts to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            libs/*.jar
+            mnemonic4j-javadoc.tar.gz
+      - name: Upload Documentation to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: javadoc
+
+  deploy-maven-central:
+    needs: [ build, javadoc ]
+    if: github.event_name == 'release' && github.event.action == 'created'
+    runs-on: ubuntu-latest
+    env:
+      SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+      SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+      SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+      SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+      SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+      - name: Publish to Maven Central
+        run: ./gradlew publishAllPublicationsToCentralPortal
