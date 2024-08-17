@@ -59,13 +59,14 @@ To convert a mnemonic sentence into a binary seed, use the `toSeed` method:
 
 ```java
 String words = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
+String passphrase = "passw0rd";
 Mnemonic mnemonic = new Mnemonic();
-byte[] seed = Mnemonic.toSeed(words, "");
+byte[] seed = Mnemonic.toSeed(words, passphrase);
 ```
 
 ### Checking Mnemonic Validity
 
-To check if a mnemonic sentence is valid, use the `isValid` method:
+To check if a mnemonic sentence is valid, use the `check` method:
 
 ```java
 String words = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
