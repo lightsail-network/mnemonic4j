@@ -96,6 +96,7 @@ class Mnemonic(val language: Language = Language.ENGLISH, wordlist: List<String>
          * @return The seed.
          */
         @JvmStatic
+        @JvmOverloads
         fun toSeed(mnemonic: String, passphrase: String = ""): ByteArray {
             val normalizedMnemonic = normalizeString(mnemonic)
             val normalizedPassphrase = normalizeString("mnemonic$passphrase")
@@ -121,6 +122,7 @@ class Mnemonic(val language: Language = Language.ENGLISH, wordlist: List<String>
          * @throws IllegalArgumentException If the seed length is not 64 bytes.
          */
         @JvmStatic
+        @JvmOverloads
         fun toHdMasterKey(seed: ByteArray, testnet: Boolean = false): String {
             require(seed.size == 64) { "Provided seed should have length of 64" }
 
