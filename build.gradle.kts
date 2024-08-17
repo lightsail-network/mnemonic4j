@@ -19,16 +19,33 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.11.0")
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
 
-java {
-    withSourcesJar()
+
+tasks {
+    test {
+        useJUnitPlatform()
+    }
+
+    val sourcesJar by creating(Jar::class) {
+        archiveClassifier = "sources"
+        from(sourceSets.main.get().allSource)
+    }
+
+    val javadocJar by creating(Jar::class) {
+        archiveClassifier = "javadoc"
+        dependsOn(javadoc)
+        from(javadoc.get().destinationDir) // It needs to be placed after the javadoc task, otherwise it cannot read the path we set.
+    }
 }
 
 kotlin {
     jvmToolchain(21)
+}
+
+artifacts {
+    archives(tasks.jar)
+    archives(tasks["javadocJar"])
+    archives(tasks["sourcesJar"])
 }
 
 publishing {
@@ -37,6 +54,7 @@ publishing {
             artifactId = "mnemonic4j"
             from(components["java"])
             artifact(tasks["sourcesJar"])
+            artifact(tasks["javadocJar"])
             pom {
                 name.set("mnemonic4j")
                 description.set("Java mnemonic code for generating deterministic keys, BIP39.")
@@ -85,6 +103,7 @@ signing {
     useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
     sign(publishing.publications["mavenJava"])
 }
+
 
 nmcp {
     // https://github.com/GradleUp/nmcp
