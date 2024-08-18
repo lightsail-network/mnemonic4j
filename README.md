@@ -100,6 +100,25 @@ Mnemonic mnemonic = new Mnemonic(Language.ENGLISH, customWords);
 String words = mnemonic.generate();
 ```
 
+## Android Support
+
+The library works well on Android platforms:
+
+- For Android platforms with API level 26 and above, no additional configuration is required.
+- For versions below Android API 26, due to the lack of support for
+  certain necessary cryptographic algorithms, you need to include the following dependency:
+
+    ```kotlin
+    implementation("org.bouncycastle:bcprov-jdk18on:1.78.1")
+    ```
+
+  Additionally, add the following lines of code to your Android project:
+
+    ```kotlin
+    Security.removeProvider(BouncyCastleProvider.PROVIDER_NAME)
+    Security.addProvider(BouncyCastleProvider() as Provider?)
+    ```
+
 ## License
 
 This library is released under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
